@@ -117,7 +117,9 @@ Both write a log into `logs\`.
 
 ## Screenshots
 
-(Placeholder — add screenshots here if you wish.)
+![Screenshot 1](screenshots/launcher-1.png)
+
+![Screenshot 2](screenshots/launcher-2.png)
 
 ---
 
@@ -127,6 +129,7 @@ Both write a log into `logs\`.
 launcher/          C++ source (main.cpp, core.cpp/h, languages.h)
 imgui/             Vendored Dear ImGui (MIT; imgui/LICENSE.txt)
 resource/          Icon, manifest, version resource, PNG icons
+screenshots/       Interface screenshots
 CMakeLists.txt     CMake build script
 dynamic_build.bat  One-click dynamic build (MinGW paths preconfigured)
 static_build.bat   One-click static build

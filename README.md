@@ -121,7 +121,9 @@ cmake --build build --config Release
 
 ## Скриншоты
 
-(Плейсхолдер — при желании добавьте скриншоты сюда.)
+![Скриншот 1](screenshots/launcher-1.png)
+
+![Скриншот 2](screenshots/launcher-2.png)
 
 ---
 
@@ -131,6 +133,7 @@ cmake --build build --config Release
 launcher/          Исходники C++ (main.cpp, core.cpp/h, languages.h)
 imgui/             Dear ImGui (MIT; imgui/LICENSE.txt)
 resource/          Иконка, манифест, ресурс версии, PNG-иконки
+screenshots/       Скриншоты интерфейса
 CMakeLists.txt     Скрипт сборки CMake
 dynamic_build.bat  Динамическая сборка в один клик (пути MinGW преднастроены)
 static_build.bat   Статическая сборка в один клик
