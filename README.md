@@ -1,61 +1,64 @@
-# SA:MP Launcher
+# SA:MP Лаунчер
 
-A modern, clean-room **C++ / Win32 / Dear ImGui** launcher for
-**San Andreas Multiplayer 0.3.7 / 0.3.DL**.
+Современный, написанный «с чистого листа» **C++ / Win32 / Dear ImGui**
+лаунчер для **San Andreas Multiplayer 0.3.7 / 0.3.DL**.
 
-Fully rewritten without VCL / RAD Studio. Builds with **MinGW-w64** and
-**CMake** (Ninja). Renders its own custom UI with Dear ImGui (D3D11 backend).
+Полностью переписан без VCL / RAD Studio. Собирается с помощью
+**MinGW-w64** и **CMake** (Ninja). Рисует собственный интерфейс на Dear ImGui
+(бэкенд D3D11).
 
-> This project is a community reimplementation of the classic SA:MP launcher.
-> It is **not** affiliated with Rockstar Games, Take-Two Interactive, or the
-> SA:MP team. Please read `DISCLAIMER.md` and `LICENSE.txt` before use.
+> Это проект сообщества — переделанный классический лаунчер SA:MP. Он **не**
+> связан с Rockstar Games, Take-Two Interactive или командой SA:MP.
+> Перед использованием прочитайте `DISCLAIMER.md` и `LICENSE.txt`.
 
 ---
 
-## Features
+## Возможности
 
-- Full server browser UI (master server list, favorites, hosted list) drawn
-  with Dear ImGui — no VCL, no OS chrome
-- Async, multithreaded server queries (ping, info, players, rules)
-- Custom search + filters: name / IP / mode / map / **language (dropdown
-  combobox with live filter, ~100 languages and country variants)**
-- Show/hide toggles: full games, empty games, password-protected servers
-- Right-click context menu on servers: Connect, Server Properties,
+- Полноценный серверный браузер (список мастер-сервера, избранное, hosted)
+  на Dear ImGui — без VCL и элементов ОС
+- Асинхронные, многопоточные запросы к серверам (пинг, инфо, игроки, правила)
+- Настраиваемый поиск и фильтры: имя / IP / режим / карта / **язык
+  (выпадающий комбобокс с живым поиском, ~100 языков и региональных
+  вариантов)**
+- Переключатели «показать/скрыть»: полные серверы, пустые, с паролем
+- Контекстное меню по правой кнопке мыши: Connect, Server Properties,
   Copy Server Info, Refresh Server
-- Server Properties dialog with Connect button
-- Favorites list (save / load), import & export
-- RCON console support
-- Custom accent-color / theme settings, persisted to `samp_c.ini`
-- Nickname history (persisted to `nickhistory.xml`)
-- Full High-DPI support, fixed-size window (no resize / fullscreen)
-- SAMP window icon on the title bar and taskbar
-- Static (no runtime DLLs) or dynamic MinGW build
+- Диалог свойств сервера с кнопкой Connect
+- Список избранного (сохранение / загрузка), импорт и экспорт
+- Поддержка RCON-консоли
+- Настройки темы и акцентного цвета, сохраняются в `samp_c.ini`
+- История ников (сохраняется в `nickhistory.xml`)
+- Полная поддержка High DPI, фиксированный размер окна
+  (без изменения размера / полноэкранного режима)
+- Иконка SAMP в заголовке окна и на панели задач
+- Статическая (без runtime DLL) или динамическая сборка MinGW
 
 ---
 
-## Requirements to run
+## Требования для запуска
 
-- Microsoft Windows (7 SP1 / 8 / 8.1 / 10 / 11), 64-bit recommended
-- **A legitimate copy of Grand Theft Auto: San Andreas (2004)** — required,
-  the launcher does **not** ship or download the game
-- **SA:MP client files**, most importantly **`samp.dll`**, present in the
-  folder next to `gta_sa.exe`
-  - The launcher **does not bundle** `samp.dll`.
-  - Without `samp.dll` you **cannot join servers** — the launcher shows an
-    error dialog and aborts the launch.
-  - Get SA:MP client files only from trusted sources.
+- Microsoft Windows (7 SP1 / 8 / 8.1 / 10 / 11), рекомендуется 64-битная
+- **Легальная копия Grand Theft Auto: San Andreas (2004)** — обязательна,
+  лаунчер **не** прилагает и не скачивает игру
+- **Клиентские файлы SA:MP**, самое главное — **`samp.dll`**, в папке рядом
+  с `gta_sa.exe`
+  - Лаунчер **не** включает `samp.dll`.
+  - Без `samp.dll` **невозможно зайти на сервер** — лаунчер показывает
+    окно с ошибкой и прерывает запуск.
+  - Скачивайте клиентские файлы SA:MP только из проверенных источников.
 
 ---
 
-## Build (Windows)
+## Сборка (Windows)
 
-### Toolchain
+### Инструменты
 
-- **CMake** ≥ 3.16 (tested with the CMake shipped with MinGW-w64)
-- **MinGW-w64** (GCC / G++) — tested with `C:\MinGW64\mingw64`
-- **Ninja** build tool (`ninja.exe` on `PATH`)
+- **CMake** ≥ 3.16 (проверялось с CMake из комплекта MinGW-w64)
+- **MinGW-w64** (GCC / G++) — проверялось с `C:\MinGW64\mingw64`
+- **Ninja** (`ninja.exe` в `PATH`)
 
-### Configure (dynamic build)
+### Настройка (динамическая сборка)
 
 ```powershell
 cmake -S . -B build -G Ninja `
@@ -65,17 +68,17 @@ cmake -S . -B build -G Ninja `
   -DCMAKE_BUILD_TYPE=Release
 ```
 
-### Build
+### Сборка
 
 ```powershell
 cmake --build build --config Release
 ```
 
-Output: `build\samp.exe`
+Результат: `build\samp.exe`
 
-### Static build (no MinGW runtime DLLs needed)
+### Статическая сборка (без runtime DLL MinGW)
 
-Add `-DSAMP_STATIC=ON` when configuring:
+Добавьте `-DSAMP_STATIC=ON` при настройке:
 
 ```powershell
 cmake -S . -B build -G Ninja `
@@ -87,75 +90,78 @@ cmake -S . -B build -G Ninja `
 cmake --build build --config Release
 ```
 
-In a static build `samp.exe` links the MinGW runtimes statically, so you get a
-single self-contained `samp.exe` with no `libstdc++-6.dll`,
-`libgcc_s_seh-1.dll` or `libwinpthread-1.dll` dependencies.
+В статической сборке `samp.exe` линкует рантайм MinGW статически, поэтому
+получается один самодостаточный `samp.exe` без зависимостей
+`libstdc++-6.dll`, `libgcc_s_seh-1.dll` и `libwinpthread-1.dll`.
 
-### Also included
+### Также в комплекте
 
-Two convenience batch scripts that assume a typical local toolchain layout:
+Два удобных bat-скрипта, рассчитанных на типичное локальное расположение
+инструментов:
 
-- `dynamic_build.bat` — configure + build into `build\`
-- `static_build.bat` — configure + build with `-DSAMP_STATIC=ON`
+- `dynamic_build.bat` — настройка + сборка в `build\`
+- `static_build.bat` — настройка + сборка с `-DSAMP_STATIC=ON`
 
-Both write a log into `logs\`.
-
----
-
-## Installing & running
-
-1. Build `samp.exe` (see above) **or** download a prebuilt release.
-2. Place `samp.exe` anywhere handy.
-3. Make sure your **legally owned** copy of GTA: San Andreas is installed and
-   that `samp.dll` (SA:MP client) sits next to `gta_sa.exe`.
-4. Run `samp.exe`, pick a server, press **Connect**.
-
-> The first launch creates `nickhistory.xml` and `samp_c.ini` next to the
-> launcher.
+Оба пишут лог в `logs\`.
 
 ---
 
-## Screenshots
+## Установка и запуск
 
-(Placeholder — add screenshots here if you wish.)
+1. Соберите `samp.exe` (см. выше) **или** скачайте готовую сборку.
+2. Положите `samp.exe` в любое удобное место.
+3. Убедитесь, что установлена ваша **лицензионная** копия GTA: San Andreas и
+   что `samp.dll` (клиент SA:MP) лежит рядом с `gta_sa.exe`.
+4. Запустите `samp.exe`, выберите сервер и нажмите **Connect**.
+
+> При первом запуске рядом с лаунчером создаются `nickhistory.xml`
+> и `samp_c.ini`.
 
 ---
 
-## Repository structure
+## Скриншоты
+
+(Плейсхолдер — при желании добавьте скриншоты сюда.)
+
+---
+
+## Структура репозитория
 
 ```text
-launcher/          C++ source (main.cpp, core.cpp/h, languages.h)
-imgui/             Vendored Dear ImGui (MIT; imgui/LICENSE.txt)
-resource/          Icon, manifest, version resource, PNG icons
-CMakeLists.txt     CMake build script
-dynamic_build.bat  One-click dynamic build (MinGW paths preconfigured)
-static_build.bat   One-click static build
-LICENSE.txt        GNU GPL v3 — full text
-DISCLAIMER.md      Trademarks / ownership / third-party rights
+launcher/          Исходники C++ (main.cpp, core.cpp/h, languages.h)
+imgui/             Dear ImGui (MIT; imgui/LICENSE.txt)
+resource/          Иконка, манифест, ресурс версии, PNG-иконки
+CMakeLists.txt     Скрипт сборки CMake
+dynamic_build.bat  Динамическая сборка в один клик (пути MinGW преднастроены)
+static_build.bat   Статическая сборка в один клик
+LICENSE.txt        GNU GPL v3 — полный текст
+DISCLAIMER.md      Товарные знаки / права собственности / права третьих лиц
+README_EN.md       Эта документация на английском языке
 ```
 
 ---
 
-## Credits & licenses
+## Авторы и лицензии
 
-- **This launcher** — written from scratch in C++/Win32/Dear ImGui
-  (no VCL). Licensed under **GPL-3.0**, see `LICENSE.txt`.
-- Build/drop-in concepts and project layout reference the open-source project
+- **Этот лаунчер** — написан с нуля на C++/Win32/Dear ImGui
+  (без VCL). Лицензия **GPL-3.0**, см. `LICENSE.txt`.
+- Концепции сборки и структура проекта основаны на открытом проекте
   [`1therealcloud/samp-launcher`](https://github.com/1therealcloud/samp-launcher)
   (GPL-3.0).
-- **Dear ImGui** — by Omar Cornut and contributors, MIT license
+- **Dear ImGui** — Omar Cornut и участники, лицензия MIT
   (`imgui/LICENSE.txt`).
-- **SA:MP** — community multiplayer mod, not affiliated with the game's
-  publishers. See `DISCLAIMER.md`.
-- **Grand Theft Auto: San Andreas** (2004) — copyright Rockstar North /
-  Rockstar Games / Take-Two Interactive. This project is not endorsed or
-  sponsored by them. See `DISCLAIMER.md`.
+- **SA:MP** — мультиплеерный мод сообщества, не связан с издателями игры.
+  См. `DISCLAIMER.md`.
+- **Grand Theft Auto: San Andreas** (2004) — копирайт Rockstar North /
+  Rockstar Games / Take-Two Interactive. Этот проект не одобрен и не
+  спонсируется ими. См. `DISCLAIMER.md`.
 
 ---
 
-## Disclaimer (short)
+## Отказ от ответственности (кратко)
 
-This software is provided "as is", **without any warranty**. Use it at your
-own risk. It is not affiliated with, endorsed by, or sponsored by Rockstar
-Games, Take-Two Interactive, or the SA:MP team. See `DISCLAIMER.md` and
-`LICENSE.txt` for full legal notices.
+Программа предоставляется «как есть», **без каких-либо гарантий**.
+Вы используете её на свой риск. Она не связана с Rockstar Games,
+Take-Two Interactive или командой SA:MP, не одобрена и не спонсируется ими.
+Полные правовые уведомления — в `DISCLAIMER.md` и `LICENSE.txt`. English
+version: `README_EN.md`.
