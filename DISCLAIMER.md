@@ -1,10 +1,5 @@
 # DISCLAIMER — Trademarks, Ownership and Third-Party Rights
 
-This document is part of the `samp-launcher` repository. It applies to this
-launcher software, its source code, its binaries, its documentation and any
-other assets distributed as part of this project. Please read it carefully
-before using, building, or redistributing anything from this repository.
-
 ---
 
 ## 1. Grand Theft Auto: San Andreas (2004)
