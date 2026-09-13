@@ -1,0 +1,70 @@
+name: Build & Release
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  ZIP_NAME: samp-launcher-${{ github.ref_name }}.zip
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup MSYS2 (MinGW-w64 toolchain, CMake, Ninja, windres)
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          install: >-
+            mingw-w64-x86_64-gcc
+            mingw-w64-x86_64-cmake
+            mingw-w64-x86_64-ninja
+            mingw-w64-x86_64-binutils
+
+      - name: Configure (static build)
+        shell: msys2 {0}
+        run: |
+          cmake -S . -B build -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DSAMP_STATIC=ON
+
+      - name: Build
+        shell: msys2 {0}
+        run: cmake --build build
+
+      - name: Verify binary
+        shell: msys2 {0}
+        run: |
+          ls -la build/samp.exe
+          file build/samp.exe
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: samp-windows-x64
+          path: build/samp.exe
+
+      - name: Package release archive
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          mkdir dist
+          cp build/samp.exe dist/
+          cp README.md README_EN.md LICENSE.txt DISCLAIMER.md dist/
+          powershell -Command "Compress-Archive -Path dist/* -DestinationPath $env:ZIP_NAME -CompressionLevel Optimal"
+
+      - name: Create / update release with changelog
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ github.ref_name }}
+          generate_release_notes: true
+          files: ${{ env.ZIP_NAME }}

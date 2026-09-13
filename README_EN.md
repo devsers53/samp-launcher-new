@@ -1,5 +1,7 @@
 # SA:MP Launcher
 
+[![Build & Release](https://github.com/devsers53/samp-launcher-new/actions/workflows/build.yml/badge.svg)](https://github.com/devsers53/samp-launcher-new/actions/workflows/build.yml)
+
 A modern, clean-room **C++ / Win32 / Dear ImGui** launcher for
 **San Andreas Multiplayer 0.3.7 / 0.3.DL**.
 
@@ -135,6 +137,7 @@ dynamic_build.bat  One-click dynamic build (MinGW paths preconfigured)
 static_build.bat   One-click static build
 LICENSE.txt        GNU GPL v3 — full text
 DISCLAIMER.md      Trademarks / ownership / third-party rights
+.github/workflows/ GitHub Actions: build + auto-release with changelog
 ```
 
 ---

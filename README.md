@@ -1,5 +1,7 @@
 # SA:MP Лаунчер
 
+[![Build & Release](https://github.com/devsers53/samp-launcher-new/actions/workflows/build.yml/badge.svg)](https://github.com/devsers53/samp-launcher-new/actions/workflows/build.yml)
+
 Современный, написанный «с чистого листа» **C++ / Win32 / Dear ImGui**
 лаунчер для **San Andreas Multiplayer 0.3.7 / 0.3.DL**.
 
@@ -140,6 +142,7 @@ static_build.bat   Статическая сборка в один клик
 LICENSE.txt        GNU GPL v3 — полный текст
 DISCLAIMER.md      Товарные знаки / права собственности / права третьих лиц
 README_EN.md       Эта документация на английском языке
+.github/workflows/ GitHub Actions: сборка и авто-релиз с чейнджлогом
 ```
 
 ---
